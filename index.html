@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Pentagon Portfolio</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1A1625;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #FFFFFF;
+            --text-secondary: #B8B8B8;
+            --accent-primary: #D4A574;
+            /* Warm Gold */
+            --accent-secondary: #E07B53;
+            /* Warm Orange */
+            --accent-tertiary: #5B7FA3;
+            /* Muted Blue */
+            --border-color: rgba(212, 165, 116, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #1A1625;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .poster-container {
+            width: 720px;
+            min-height: 960px;
+            background: radial-gradient(circle at top right, #2D2538, #1A1625);
+            color: var(--text-primary);
+            padding: 50px 50px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Decorative Background Elements */
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .glow-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.12) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            z-index: 0;
+        }
+
+        .glow-circle-2 {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(224, 123, 83, 0.1) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            z-index: 0;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+            flex: 1;
+        }
+
+        /* Header Section */
+        header {
+            border-left: 4px solid var(--accent-primary);
+            padding-left: 24px;
+            margin-bottom: 5px;
+        }
+
+        .year-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            color: var(--accent-primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(90deg, #FFF, #E8E8E8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tagline {
+            font-size: 16px;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 85%;
+        }
+
+        /* Hero Image */
+        .hero-section {
+            width: 100%;
+            height: 380px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: top;
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-section img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.85) sepia(0.1) contrast(1.1);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(26, 22, 37, 0.9), transparent);
+            padding: 20px;
+        }
+
+        /* About/Mission Card */
+        .mission-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+        }
+
+        .mission-card::before {
+            content: "OUR MISSION";
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--accent-secondary);
+            background: #1A1625;
+            padding: 0 8px;
+        }
+
+        .mission-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #E0E0E0;
+            text-align: justify;
+        }
+
+        .highlight {
+            color: var(--accent-primary);
+            font-weight: 500;
+        }
+
+        /* Team Members Section */
+        .team-section {
+            background: rgba(91, 127, 163, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(91, 127, 163, 0.2);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .section-title i {
+            color: var(--accent-primary);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .team-member {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .member-avatar {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #D4A574, #E07B53);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .member-avatar::after {
+            content: "";
+            position: absolute;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 1px solid rgba(212, 165, 116, 0.3);
+        }
+
+        .member-avatar i {
+            font-size: 26px;
+            color: white;
+        }
+
+        .member-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #E8E8E8;
+            line-height: 1.3;
+        }
+
+        /* Technical Domains */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .tech-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tech-card-img {
+            height: 110px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .tech-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.2) contrast(1.1);
+        }
+
+        .tech-card-content {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .tech-card h3 {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-primary);
+        }
+
+        .tech-card p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        /* Legacy Footer */
+        .legacy-section {
+            margin-top: auto;
+            background: linear-gradient(90deg, rgba(212, 165, 116, 0.1), transparent);
+            border-left: 2px solid var(--accent-primary);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .legacy-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 15px;
+            color: var(--accent-primary);
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .legacy-text {
+            font-size: 14px;
+            color: #CCC;
+            font-style: italic;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            text-decoration: none;
+            color: var(--accent-secondary);
+            font-size: 12px;
+            border-bottom: 1px solid var(--accent-secondary);
+            padding-bottom: 2px;
+        }
+
+        .footer-info {
+            margin-top: 24px;
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 14px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+
+        .footer-info span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="poster-container">
+        <!-- Background Effects -->
+        <div class="bg-grid"></div>
+        <div class="glow-circle"></div>
+        <div class="glow-circle-2"></div>
+
+        <div class="content-wrapper">
+
+            <!-- Header -->
+            <header>
+                <span class="year-tag">Est. 2022</span>
+                <h1>Team Pentagon</h1>
+                <div class="tagline">A Commemoration of Research, Innovation & Friendship</div>
+            </header>
+
+            <!-- Hero Image -->
+            <div class="hero-section">
+                <img src="https://raw.githubusercontent.com/TeamPentagon/TeamPentagon.github.io/refs/heads/main/banner.png"
+                    alt="Team Pentagon Collaboration">
+                <div class="hero-overlay">
+                    <div style="font-family: 'JetBrains Mono'; font-size: 12px; color: var(--accent-primary);">
+                        UNDERGRADUATE RESEARCH TEAM</div>
+                </div>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="mission-card">
+                <p class="mission-text">
+                    Team Pentagon was an undergraduate student team founded in 2022 with the goal of <span
+                        class="highlight">advancing research in cutting-edge fields</span> and building high-quality
+                    projects with positive societal impact.
+                </p>
+                <p class="mission-text" style="margin-top: 12px;">
+                    Each semester, we challenged ourselves by exploring diverse technical areas such as artificial
+                    intelligence, deep learning, blockchain, and privacy-preserving decentralized systems. Working
+                    within academic constraints, we delivered robust technical solutions driven by curiosity and a
+                    strong desire to learn.
+                </p>
+            </div>
+
+            <!-- Team Members Section -->
+            <div class="team-section">
+                <div class="section-title">
+                    <i class="material-icons">groups</i>
+                    Our Team
+                </div>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="member-name">Sohel Ahmed<br>Joni</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="member-name">Rabiul<br>Rahat</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="member-name">Nishat<br>Tasnin</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="member-name">Sorna<br>Das</div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <div class="member-name">Saria<br>Alam</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Domains -->
+            <div class="tech-section">
+                <div class="section-title">
+                    <i class="material-icons">developer_board</i>
+                    Our Expertise
+                </div>
+                <div class="tech-grid">
+                    <!-- AI Card -->
+                    <div class="tech-card">
+                        <div class="tech-card-img">
+                            <img src="https://sfile.chatglm.cn/images-ppt/fafde4bfda4c.jpg" alt="AI Visualization">
+                        </div>
+                        <div class="tech-card-content">
+                            <h3>AI & Deep Learning</h3>
+                            <p>Advanced neural networks, computer vision, and predictive modeling.</p>
+                        </div>
+                    </div>
+                    <!-- Blockchain Card -->
+                    <div class="tech-card">
+                        <div class="tech-card-img">
+                            <img src="https://sfile.chatglm.cn/images-ppt/8e6421303793.jpeg" alt="Blockchain Structure">
+                        </div>
+                        <div class="tech-card-content">
+                            <h3>Blockchain</h3>
+                            <p>Privacy-preserving decentralized systems and distributed ledgers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Legacy Section -->
+            <div class="legacy-section">
+                <div class="legacy-title">Our Legacy</div>
+                <p class="legacy-text">
+                    Now, having completed our degrees, we present this GitHub organization as a collaborative legacy and
+                    our contribution to the open-source community. It stands as a lasting record of the passion that
+                    pushed our limits and shaped our growth.
+                </p>
+                <div class="github-link">
+                    <i class="material-icons" style="font-size: 16px;">code</i>
+                    View Open Source Contributions
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer-info">
+                <span><i class="material-icons" style="font-size: 14px;">favorite</i> Made with passion</span>
+                <span><i class="material-icons" style="font-size: 14px;">school</i> 2022-2025</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
